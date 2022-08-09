@@ -13,6 +13,8 @@ jobs:
 
   run-windows-commands:
     runs-on: windows-latest
+    # set dependency
+    needs: ["run-shell-command"]
     steps:
       - name: Directory Powershell
         run: Get-Location
