@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Simple JS Action
         id: greet
-        uses: actions/hello-world-javascript-actions@v1.1
+        uses: hywvivi98/hello-world-javascript-actions@v1.0.0
         with:
           who-to-greet: Yiwei
       - name: Log Greeting Time
