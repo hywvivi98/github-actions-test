@@ -4,7 +4,6 @@ on:
   # push:
   schedule:
     - cron: "1 * * * *"
-    # - cron: "0/6 * * * *"
   pull_request:
     types: [closed, assigned, opened, reopened]
 
