@@ -2,10 +2,16 @@ name: Actions Workflow
 
 on:
   push:
-  schedule:
-    - cron: "1 * * * *"
-  # pull_request:
-  #   types: [closed, assigned, opened, reopened]
+    branches:
+      - master
+      - "feature/*" # matches feature/featureA, feature/feaB, but won't mathch feature/feat/A
+      - "feature/**" # match everything
+      # Filter pattern cheat sheet: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+    tags:
+      - v1.*
+    paths:
+      - "**.js"
+      - "!filename.js" # match the others except for this file
 
 jobs:
   run-github-actions:
