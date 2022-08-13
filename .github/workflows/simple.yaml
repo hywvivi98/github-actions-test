@@ -3,10 +3,13 @@ on: [push]
 jobs:
   run-shell-command:
     runs-on: ubuntu-latest
+    timeout-minutes: 360 # the max number of minutes that the job can take
     steps:
       - name: echo a string
         run: echo "Hello Yiwei"
+        # continue-on-error: true # all the other steps will still run even if this step fails
       - name: multiline script
+        # if: failure() # will run if this step fail
         run: |
           node -v
           npm -v
