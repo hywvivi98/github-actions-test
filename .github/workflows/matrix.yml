@@ -2,13 +2,19 @@ name: Matrix
 on: push
 jobs:
   node-version:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        node-version: [6, 8, 10] # test on different node versions
+      # fail-fast: true
+
+    runs-on: ${{matrix.os}}
     steps:
       - name: Log mode node-version
         run: node -v
       # set a new version
       - uses: actions/setup-node@v1
         with:
-          node-version: 6
+          node-version: ${{matrix.node-version}} #reference the node version
       - name: Log mode node-version
         run: node -v
