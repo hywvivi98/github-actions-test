@@ -1,0 +1,31 @@
+name: Matrix
+on: pull_request
+jobs:
+  node-version:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        node-version: [6, 8, 10] # test on different node versions
+        # fail-fast: true
+        include:
+          - os: ubuntu-latest
+            node-version: 8
+            is_ubuntu_8: "true" # add a new variable, and this will exist only when os is ubuntu and version is 8
+        exclude:
+          - os: ubuntu-latest
+            node-version: 6 #if we put this exclude condition, the job will only run 8 times instead of 9 times
+
+    runs-on: ${{matrix.os}}
+    env:
+      IS_UBUNTU_8: ${{matrix.is_ubuntu_8}}
+    steps:
+      - name: Log mode node-version
+        run: node -v
+      # set a new version
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node-version}} #reference the node version
+      - name: Log mode node-version
+        run: |
+          node -v
+          echo $IS_UBUNTU_8x
